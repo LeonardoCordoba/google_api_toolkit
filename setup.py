@@ -13,6 +13,5 @@ setup(name='googleapitoolkit',
       author='',
       author_email='',
       license='MIT',
-      packages=["google_api_toolkit","google_api_toolkit.base", "google_api_toolkit.big_query",
-                "google_api_toolkit.google_analytics"],
+      packages=["base", "big_query", "google_analytics"],
       zip_safe=False)
