@@ -15,7 +15,6 @@ class Response(r.Response):
         self.parse_body()
 
     # ------------------------------------------------------------------------
-    # TODO: should handle many reports?
     def parse_body(self):
         report = self.api_response.get('reports', [])[0]
         report_data = report.get('data', {})
@@ -37,6 +36,5 @@ class Response(r.Response):
                         report_data.get('rows', [])))
 
         df = pd.DataFrame(data, columns=columns)
-        df['dateHourMinute'] = pd.to_datetime(df['dateHourMinute'], format='%Y%m%d%H%M')
 
         self.response_body = df

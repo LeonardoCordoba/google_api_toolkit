@@ -9,12 +9,10 @@ class Report():
         self.metrics = []
         self.dimensions = []
         self.filters = []
-
         self.next_page = None
-
         self.sampling_level = 'LARGE'
         self.page_size = 10000
-
+        self.page_token = 0
         self.request_body = None
 
     # ------------------------------------------------------------------------
@@ -42,7 +40,7 @@ class Report():
     # ------------------------------------------------------------------------
     # TODO: validate input
     def add_date_range(self, start_date, end_date):
-        assert utils.validate_date_range(start_date, end_date)
+        #assert utils.validate_date_range(start_date, end_date)
         self.date_ranges.append((start_date, end_date))
 
     # ------------------------------------------------------------------------
@@ -63,7 +61,6 @@ class Report():
 
 
     # ------------------------------------------------------------------------
-    # TODOL nextPageToken not showing up
     def build_report_body(self):
         self.request_body = {'reportRequests': [{
             'viewId': str(self.view_id),
@@ -75,10 +72,8 @@ class Report():
                             for filter in self.filters]
             }],
             'samplingLevel': self.sampling_level,
-            'pageSize': self.page_size
+            'pageSize': self.page_size,
+            'pageToken': str(self.page_token)
         }
         ]
         }
-
- #       if self.next_page is not None:
- #           self.request_body['pageToken'] = str(self.next_page * self.page_size)
