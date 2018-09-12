@@ -19,8 +19,9 @@ class Response(r.Response):
         report = self.api_response.get('reports', [])[0]
         report_data = report.get('data', {})
 
-        self.total_rows = report_data.get('rowCount')
-        self.total_pages = math.ceil(report_data.get('rowCount') / self.rows_per_page)
+        self.total_rows = report_data.get('rowCount',0)
+        self.total_pages = math.ceil(self.total_rows/self.rows_per_page)
+
 
 
         if 'samplingSpaceSizes' in report_data.keys():
